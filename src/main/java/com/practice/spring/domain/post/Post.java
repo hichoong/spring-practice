@@ -2,6 +2,7 @@ package com.practice.spring.domain.post;
 
 import com.practice.spring.domain.BaseTimeEntity;
 import com.practice.spring.domain.DefineYn;
+import com.practice.spring.domain.user.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,19 +24,25 @@ public class Post extends BaseTimeEntity {
     @Column(nullable = false)
     private String content;
 
+    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    private User user;
+
     private DefineYn deleteYn;
 
     @Builder
-    private Post(String title, String content, DefineYn deleteYn) {
+    private Post(String title, String content, DefineYn deleteYn, User user) {
         this.title = title;
         this.content = content;
+        this.user = user;
         this.deleteYn = deleteYn;
     }
 
-    public Post createPost(String title, String content) {
+    public static Post createPost(String title, String content, User user) {
         return new PostBuilder()
                 .title(title)
                 .content(content)
+                .user(user)
                 .deleteYn(DefineYn.N)
                 .build();
     }

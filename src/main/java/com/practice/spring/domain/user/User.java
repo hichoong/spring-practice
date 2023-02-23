@@ -2,7 +2,6 @@ package com.practice.spring.domain.user;
 
 import com.practice.spring.domain.BaseTimeEntity;
 import com.practice.spring.domain.DefineYn;
-import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,7 +37,7 @@ public class User extends BaseTimeEntity {
         this.quit = quit;
     }
 
-    public static User createUser(String nickname, UserRole accountType, String accountId, DefineYn quit) {
+    public static User createUser(String nickname, UserRole accountType, String accountId) {
         return new UserBuilder()
                 .nickname(nickname)
                 .accountType(accountType)
